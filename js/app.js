@@ -47,16 +47,16 @@ Player.prototype.render = function() {
 
 // HandleInputMethod
 Player.prototype.handleInput = function(mov) {
-    if (mov === 'right' && this.x >= 0 && this.x <= 300) {
+    if (mov === 'right' && this.x <= 300) {
         this.x += 100;
     }
-    else if(mov === 'left' && this.x >= 100 && this.x <= 400){
+    else if(mov === 'left' && this.x >= 100){
         this.x -= 100;
     }
-    else if (mov === 'down' && this.y >= -15 && this.y <= 317){
+    else if (mov === 'down' && this.y <= 317){
         this.y += 83;
     }
-    else if (mov === 'up' && this.y >= 68 && this.y <= 400){
+    else if (mov === 'up' && this.y >= 68){
         this.y -= 83;
     }
     this.winGame();
@@ -67,11 +67,17 @@ Player.prototype.winGame = function() {
     if (this.y <= 0) {
         setTimeout(function(){
             alert('You win! ;)');
-            player.x = 200;
-            player.y = 400;
-        }, 200);
+            player.resetGame();
+        }, 50);
     }
 };
+
+Player.prototype.resetGame = function() {
+    player.x = 200;
+    player.y = 400;
+};
+
+
 
 
 
