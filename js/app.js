@@ -1,10 +1,8 @@
 class Character {
     constructor(sprite, x, y){
-        // this.sprite = 'images/enemy-bug.png';
         this.sprite = sprite;
         this.x = x;
         this.y = y;
-        // this.speed = speed;
     }
 
     // Draw all characters on the screen, required method for game
@@ -25,13 +23,42 @@ class Enemy extends Character {
     // Parameter: dt, a time delta between ticks
     update(dt){
         this.x = (this.x <= 606) ? this.x + this.speed * dt : -101;
+        this.checkCollision(player);
+        
     }
+
+    checkCollision(player){
+        const playerX = player.x;
+        const playerY = player.y + 107; // Get the y center of the player
+        const blockW = 101;
+
+
+        if ( ((this.y + 77 < playerY) && (this.y + 145 > playerY))
+            && (((this.x + blockW/2 + 30 > playerX + 27) && (this.x < playerX + 27)) || ((this.x < playerX + 74) && (this.x + blockW/2 + 30 > playerX + 74))) ) {
+
+            setTimeout(() => {
+                window.alert('You lose! :(');
+                player.resetGame();
+                player.score = 0;
+                this.resetEnemy();
+            }, 5);
+        }
+        
+    }
+
+    resetEnemy(){
+        this.x = -101;
+    }
+
+
 }
 
 // Your player
 class Player extends Character {
-    constructor(sprite, x = 200, y = 400){
+    constructor(sprite, spriteL, x = 200, y = 400){
         super(sprite, x, y);
+        this.spriteR = sprite;
+        this.spriteL = spriteL;
         this.score = 0;
     }
 
@@ -39,9 +66,11 @@ class Player extends Character {
     handleInput(mov){
         if (mov === 'right' && this.x <= 300) {
             this.x += 100;
+            this.sprite = this.spriteR;
         }
         else if(mov === 'left' && this.x >= 100){
             this.x -= 100;
+            this.sprite = this.spriteL;
         }
         else if (mov === 'down' && this.y <= 317){
             this.y += 83;
@@ -60,13 +89,16 @@ class Player extends Character {
     // Detect when the player wins the game
     // and show a message on the screen
     winGame(){
-        const player = this;
         if (this.y <= 0) {
-            setTimeout(function(){
+            setTimeout(() => {
                 alert('You win! ;)');
-                player.resetGame();
+                this.resetGame();
             }, 50);
+
+            this.score += 100;
         }
+        
+        console.log(this.score);
     }
 
     // Send the player back to
@@ -83,10 +115,10 @@ class Player extends Character {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var bug1 = new Enemy('images/enemy-bug.png', -101, 145, 270);
-var bug2 = new Enemy('images/enemy-bug.png', -101, 228, 180);
+var bug1 = new Enemy('images/enemy-kodo.png', -101, 145, 270);
+var bug2 = new Enemy('images/enemy-blob.png', 0, 228, 340);
 
-var player = new Player('images/char-boy.png');
+var player = new Player('images/char-bender-right.png', 'images/char-bender-left.png');
 
 var allEnemies = [bug1, bug2]
 
@@ -104,4 +136,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
