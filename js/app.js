@@ -9,10 +9,6 @@ class Character {
     // Draw all characters on the screen, required method for game
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
-        // Show player score and lives at the top of the screen
-        // and a message when the player loses the game 
-        player.messages();
     }
 
 }
@@ -156,53 +152,51 @@ class Player extends Character {
         this.win = false;
     }
 
-    messages(){
-        
-        //Print a message when the player lose the game
-        if (this.lose === true){
-            ctx.beginPath();        
-            ctx.fillStyle = "rgba(0,0,0,0.3)";
-            ctx.fillRect(0, 50, 505, 536);
-            ctx.closePath();
-
-            ctx.fillStyle = "White";
-            ctx.textAlign = "center";
-            ctx.strokeStyle = "Black";
-            ctx.lineWidth = 3;
-
-            ctx.font = "68pt Fugaz One"; // You Lose
-            ctx.fillText(`You Lose`, 250, 150);
-
-            ctx.font = "20pt Fugaz One"; // Your Score
-            ctx.fillText(`Your score: ${player.score}`, 250, 200);
-
-            ctx.fillStyle = "#F8E71C"; // Press Enter to restart
-            ctx.font = "22pt Fugaz One";
-            ctx.fillText(`Press ENTER to restart`, 250, 290);
-
-            ctx.drawImage(Resources.get('images/img-losegame.png'), 0, 324); // Bender image
-        }
+}
 
 
-        //Print player score on the screen
+function screenMessages(player){
+    //Print a message when the player lose the game
+    if (player.lose === true){
+        ctx.beginPath();        
+        ctx.fillStyle = "rgba(0,0,0,0.88)";
+        ctx.fillRect(0, 50, 505, 536);
+        ctx.closePath();
+
         ctx.fillStyle = "White";
-        ctx.textAlign = "left"; 
-        ctx.font = "16pt Fugaz One";
-        ctx.strokeText(`Score: ${player.score}`, 20, 36); // Player Score
-        ctx.fillText(`Score: ${player.score}`,20,36); // Player Score Stroke
+        ctx.textAlign = "center";
+        ctx.strokeStyle = "Black";
+        ctx.lineWidth = 3;
 
+        ctx.font = "68pt Fugaz One"; // You Lose
+        ctx.fillText(`You Lose`, 250, 150);
 
-        //Print player lives on the screen
-        if (this.lives > 0){
-            let beer = 460;
-            for (let i = 0; i < this.lives; i++) {
-            ctx.drawImage(Resources.get('images/game-beer.png'), beer, 0);
-            beer = beer - 30;
-            }
+        ctx.font = "20pt Fugaz One"; // Your Score
+        ctx.fillText(`Your score: ${player.score}`, 250, 200);
+
+        ctx.fillStyle = "#F8E71C"; // Press Enter to restart
+        ctx.font = "22pt Fugaz One";
+        ctx.fillText(`Press ENTER to restart`, 250, 290);
+
+        ctx.drawImage(Resources.get('images/img-losegame.png'), 0, 324); // Bender image
+    }
+
+    //Print player score on the screen
+    ctx.fillStyle = "White";
+    ctx.textAlign = "left"; 
+    ctx.font = "16pt Fugaz One";
+    ctx.strokeText(`Score: ${player.score}`, 20, 36); // Player Score
+    ctx.fillText(`Score: ${player.score}`,20,36); // Player Score Stroke
+
+    //Print player lives on the screen
+    if (player.lives > 0){
+        let beer = 460;
+        for (let i = 0; i < player.lives; i++) {
+        ctx.drawImage(Resources.get('images/game-beer.png'), beer, 0);
+        beer = beer - 30;
         }
     }
 }
-
 
 
 // Now instantiate your objects.
@@ -221,6 +215,9 @@ let allEnemies = [
     new Enemy('images/enemy-devil.png', -15, 4, 230),
     new Enemy('images/enemy-blob.png', -22, 2, 150),
     ];
+
+
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
