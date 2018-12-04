@@ -107,12 +107,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/block-purple.png',   // Top row is purple ground
+                'images/block-grey.png',   // Row 1 of 3 of grey ground
+                'images/block-grey.png',   // Row 2 of 3 of grey ground
+                'images/block-grey.png',   // Row 3 of 3 of grey ground
+                'images/block-orange.png',   // Row 1 of 2 of orange ground
+                'images/block-orange.png'    // Row 2 of 2 of orange ground
             ],
             numRows = 6,
             numCols = 5,
@@ -169,14 +169,18 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
+        'images/block-orange.png',
+        'images/block-grey.png',
+        'images/block-purple.png',
         'images/enemy-kodo.png',
         'images/enemy-blob.png',
-        'images/char-boy.png',
+        'images/enemy-alien.png',
+        'images/enemy-devil.png',
+        'images/enemy-roberto.png',
+        'images/game-beer.png',
         'images/char-bender-right.png',
-        'images/char-bender-left.png'
+        'images/char-bender-left.png',
+        'images/img-losegame.png'
     ]);
     Resources.onReady(init);
 

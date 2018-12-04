@@ -1,4 +1,4 @@
-# Classic Arcade Game Clone Project
+# Bender against the universe - The game
 
 ## Table of Contents
 
