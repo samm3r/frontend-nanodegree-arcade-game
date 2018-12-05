@@ -7,7 +7,7 @@ Javascript game based on the classic "Frogger", famous arcade game from the 80's
 
 **Clone the repository:**
 
-	`https://github.com/samm3r/frontend-nanodegree-arcade-game`
+	https://github.com/samm3r/frontend-nanodegree-arcade-game
 
 or download the project to your computer
 
