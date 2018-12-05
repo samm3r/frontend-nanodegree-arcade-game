@@ -30,7 +30,7 @@ class Enemy extends Character {
 
     enemyPosition(player, enemy, dt){
         const boardArea = 505 + 101 // board width + enemy width
-        const enemyReset = -101 // Take the enemy back to the x = -101
+        const enemyReset = -101 // Send enemy back to the position x = -101
 
         // Check if the game if the player didn't lost the game
         if (player.lose === false){
@@ -54,15 +54,40 @@ class Enemy extends Character {
 
     //Return True if the player collides with an enemy
     checkCollision(player, enemy){
-        const playerX = player.x;
-        const playerY = player.y + 107; // Get the y center of the player
-        const blockW = 100;
+        const playerX = player.x + 27;
+        const playerXend = player.x + 74;
+        const enemyX = enemy.x + 20;
+        const enemyXend = enemy.x + 80;
 
-        if ( ((enemy.y + 77 < playerY) && (enemy.y + 145 > playerY))
-            && (((enemy.x + blockW/2 + 30 > playerX + 27) && (enemy.x + blockW/2 - 30 < playerX + 27)) || ((enemy.x + blockW/2 - 30 < playerX + 74) && (enemy.x + blockW/2 + 30 > playerX + 74))) ) {
+        const playerY = player.y + 107; // Get the y center of the player
+        const enemyY = enemy.y + 77;
+        const enemyYend = enemy.y + 145;
+
+
+        if (  
+            ( enemyY < playerY && enemyYend > playerY ) &&
+            ( ( enemyXend > playerX  && enemyX < playerX ) || ( enemyX < playerXend && enemyXend > playerXend ) ) 
+            ) {
             return true;
         }
     }
+
+    // //Return True if the player collides with an enemy
+    // checkCollision(player, enemy){
+    //     const playerX = player.x;
+    //     const playerY = player.y + 107; // Get the y center of the player
+    //     const blockW = 100;
+
+    //     if (  
+    //         ((enemy.y + 77 < playerY) && (enemy.y + 145 > playerY)) &&
+    //         (
+    //             ((enemy.x + blockW/2 + 30 > playerX + 27) && (enemy.x + blockW/2 - 30 < playerX + 27)) ||
+    //             ((enemy.x + blockW/2 - 30 < playerX + 74) && (enemy.x + blockW/2 + 30 > playerX + 74))
+    //         ) 
+    //         ) {
+    //         return true;
+    //     }
+    // }
 
     // Reset Enemy position
     resetEnemy(){
@@ -116,6 +141,7 @@ class Player extends Character {
 
     // Update the player's position, required method for game
     update(dt){
+
     }
 
     // Detect when the player wins a round
