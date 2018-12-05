@@ -18,6 +18,7 @@ Open the index.html file to see the game runing on your favorite browser.
 	- images - for the image files .png
 
 - **Or access the link below to play the online version**
+
 [Bender Against the Universe - The Game](https://samm3r.github.io/bender-game/)
 
 
