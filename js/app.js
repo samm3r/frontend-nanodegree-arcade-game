@@ -22,7 +22,7 @@ class Enemy extends Character {
 
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
-    update(dt){
+    update(player, dt){
 
         this.enemyPosition(player, this, dt);
         
@@ -62,7 +62,6 @@ class Enemy extends Character {
         const playerY = player.y + 107; // Get the y center of the player
         const enemyY = enemy.y + 77;
         const enemyYend = enemy.y + 145;
-
 
         if (  
             ( enemyY < playerY && enemyYend > playerY ) &&
