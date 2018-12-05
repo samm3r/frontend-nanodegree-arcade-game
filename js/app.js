@@ -24,13 +24,22 @@ class Enemy extends Character {
     // Parameter: dt, a time delta between ticks
     update(dt){
 
+        this.enemyPosition(player, this, dt);
+        
+    }
+
+    enemyPosition(player, enemy, dt){
+        const boardArea = 505 + 101 // board width + enemy width
+        const enemyReset = -101 // Take the enemy back to the x = -101
+
         // Check if the game if the player didn't lost the game
         if (player.lose === false){
 
-            // Make the enemies faster based on the player score
-            let level = (player.score / 4000) + 1;
+            let level = (player.score / 4000) + 1; // Make the enemies faster based on the player score
+            let enemyMovement = enemy.x + enemy.speed * level * dt; 
 
-            this.x = (this.x <= 606) ? this.x + this.speed * level * dt : -101;
+            // Reset enemy position if he is out of the board
+            enemy.x = (enemy.x <= boardArea) ? enemyMovement : enemyReset;
 
             // Check if the player collides with and enemy and didn't lose the round yet
             if (player.loseRound === false && this.checkCollision(player, this)) {
@@ -59,7 +68,6 @@ class Enemy extends Character {
     resetEnemy(){
         this.x = -100;
     }
-
 }
 
 // Your player
@@ -77,7 +85,7 @@ class Player extends Character {
 
     // HandleInputMethod
     handleInput(mov){
-        if (player.lose === false){
+        if (this.lose === false){
 
             if (mov === 'right' && this.x <= 300) {
                 this.x += 100;
@@ -99,6 +107,7 @@ class Player extends Character {
             this.restartGame();
         }
 
+        // Win the game when the player achieves the first row
         if (this.y <= 0 && this.win === false) {
             this.winGame();
         }
@@ -198,11 +207,9 @@ function screenMessages(player){
     }
 }
 
-
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
 
 let player = new Player('images/char-bender-right.png', 'images/char-bender-left.png');
 
@@ -215,8 +222,6 @@ let allEnemies = [
     new Enemy('images/enemy-devil.png', -15, 4, 230),
     new Enemy('images/enemy-blob.png', -22, 2, 150),
     ];
-
-
 
 
 // This listens for key presses and sends the keys to your
