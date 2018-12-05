@@ -5,19 +5,19 @@ Javascript game based on the classic "Frogger", famous arcade game from the 80's
 
 ## Instructions
 
-**Clone this repository:**
+- **Clone this repository:**
 `https://github.com/samm3r/frontend-nanodegree-arcade-game`
 or download the project to your computer
 
-**Start the game**
+- **Start the game**
 Open the index.html file to see the game runing on your favorite browser.
 
-**The code sctructure has 3 folders:**
-- css - for the file style.css
-- js - for the files app.js,engine.js,resources.js
-- images - for the image files .png
+- **The code sctructure has 3 folders:**
+	- css - for the file style.css
+	- js - for the files app.js,engine.js,resources.js
+	- images - for the image files .png
 
-** Or accesse the link below to play the online version **
+- **Or access the link below to play the online version**
 [Bender Against the Universe - The Game](https://samm3r.github.io/bender-game/)
 
 
